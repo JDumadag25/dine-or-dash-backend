@@ -46,3 +46,5 @@ gem 'active_model_serializers', '0.9.3'
 
 # Added at 2019-07-15 23:11:34 -0400 by Justin:
 gem "jwt", "~> 2.2"
+
+gem "figaro"
