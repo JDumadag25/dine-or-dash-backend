@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
   # attributes :id
-  attributes :email, :owner
+  attributes :id, :email, :owner
 
 end
