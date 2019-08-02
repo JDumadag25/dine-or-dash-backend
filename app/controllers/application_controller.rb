@@ -2,10 +2,16 @@ class ApplicationController < ActionController::API
 
   before_action :authorized
 
+  def jwt_password
+    ENV["JWT_PASSWORD"]
+  end
+
+
   def encode_token(payload)
     # should store secret in env variable
-    JWT.encode(payload, 'my_s3cr3t')
+    JWT.encode(payload, jwt_password)
   end
+
 
   def auth_header
     # { Authorization: 'Bearer <token>' }
@@ -17,7 +23,7 @@ class ApplicationController < ActionController::API
       token = auth_header.split(' ')[1]
       # header: { 'Authorization': 'Bearer <token>' }
       begin
-        JWT.decode(token, 'my_s3cr3t', true, algorithm: 'HS256')
+        JWT.decode(token, jwt_password, true, algorithm: 'HS256')
       rescue JWT::DecodeError
         nil
       end
